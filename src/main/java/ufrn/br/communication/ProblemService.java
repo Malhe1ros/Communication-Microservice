@@ -40,9 +40,8 @@ public class ProblemService {
     @GetMapping("/checkTrue")
     public String checkTrue() throws ExecutionException, InterruptedException {
         String requestURL = "https://codeforces.com/api/user.status?handle="+"malheiros"+"&from=1&count=1";
-
+        //TODO
         String s =  solve(requestURL).get();
-        System.out.println(s);
         return s;
     }
 
