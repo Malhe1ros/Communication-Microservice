@@ -37,12 +37,12 @@ public class ProblemService {
         return solve("https://codeforces.com/api/problemset.problems");
     }
 
-    @GetMapping("/checkTrue")
-    public String checkTrue() throws ExecutionException, InterruptedException {
-        String requestURL = "https://codeforces.com/api/user.status?handle="+"malheiros"+"&from=1&count=1";
-        //TODO
-        String s =  solve(requestURL).get();
-        return s;
+    @GetMapping("/checkTrue/{handle}")
+    public boolean checkTrue(@PathVariable(value="handle") String handle) throws ExecutionException, InterruptedException {
+        String requestURL = "https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=1";
+        String x = solve(requestURL).get();
+        System.out.println(x);
+        return x.contains("OK");
     }
 
 }
