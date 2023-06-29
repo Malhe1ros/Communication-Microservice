@@ -34,15 +34,19 @@ public class ProblemService {
 
     @GetMapping("/getAllProblems")
     public CompletableFuture<String> getProblems() throws IOException, InterruptedException {
+        System.out.println("CHAMOU");
         return solve("https://codeforces.com/api/problemset.problems");
     }
 
-    @GetMapping("/checkTrue/{handle}")
-    public boolean checkTrue(@PathVariable(value="handle") String handle) throws ExecutionException, InterruptedException {
+    @GetMapping("/checkTrue/{handle}&{problema}")
+    public boolean checkTrue(@PathVariable(value="handle") String handle,@PathVariable(value="problema") String problema) throws ExecutionException, InterruptedException {
         String requestURL = "https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=1";
         String x = solve(requestURL).get();
+        String number = problema.replaceAll("\\D+", "");
+
+        String characters = problema.replaceAll("\\d+", "");
         System.out.println(x);
-        return x.contains("OK");
+        return x.contains("OK") && x.contains(number) && x.contains(characters);
     }
 
 }
